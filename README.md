@@ -35,10 +35,15 @@ Be able to extend the Language by creating you own extensions with Prototype.
 
 # Shortcuts to run
 tsc type-annotations/main && node type-annotations/main
+
 tsc type-aliases/main && node type-aliases/main
+
 tsc union-types/main && node union-types/main
+
 tsc object-literals-lambdas/main && node object-literals-lambdas/main
+
 tsc generic-types-rest-parameters/main && node generic-types-rest-parameters/main
+
 tsc extensions/main && node extensions/main
 
 > "Any developer can write code, the best programmers conceive art."
