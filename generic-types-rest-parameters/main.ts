@@ -6,7 +6,6 @@ namespace GenericTypes {
     function fnWithGenericParams<T>(args:T):T {
         return args;
     }  
-
     export function main(){      
         let status: LoanApplicationStatusTypeAlias = LoanApplicationStatus.Open;        
         let score: LoanApplicationScore = 3;
@@ -27,54 +26,66 @@ GenericTypes.main();
 
 namespace GenericTypesImproved1 {  
     export interface ICommandType {
-        ['cmd1']: [string];
-        ['cmd2']: [boolean, number, string];
-        ['cmd3']: [boolean, boolean];
+        ['cmdA']: [string];
+        ['cmdB']: [string, boolean, number];
+        ['cmdC']: [boolean, boolean];
     }
     export type CommandType = ICommandType;
-    export function runCommand<A, B extends keyof CommandType, C extends CommandType[B]>(command: B, ...rest: C): C { // ... "Rest Parameters" already standardized in ES2015 (ES6).
+    export function runCommand<A extends keyof CommandType, B extends CommandType[A]>(command: A, ...rest: B): B { // ... "Rest Parameters" already standardized in ES2015 (ES6).
         return rest;
     }
     export function main(){      
-        const x = runCommand('cmd2', true, 1, 'hello');
-        console.log(`::::::::::: DEBUG GENERIC-TYPES-WITH-EXTEND-AND-REST-PARAMETERS : statusScoreVal<LoanApplicationStatusTypeAlias, LoanApplicationScore>: ${x }`);
+        const GENERICS_MESSAGE = '!!Powerful abstractions with generic programming!!';
+        const resultCommandA:[string] = runCommand('cmdA', GENERICS_MESSAGE);
+        const resultCommandB:[string, boolean, number] = runCommand('cmdB', GENERICS_MESSAGE, true, 2021);
+        const resultCommandC:[boolean, boolean] = runCommand('cmdC', false, true);
+        console.log(`::::::::::: DEBUG GENERIC-TYPES-WITH-EXTEND-AND-REST-PARAMETERS : resultCommandA:[string]: ${resultCommandA}`);
+        console.log(`::::::::::: DEBUG GENERIC-TYPES-WITH-EXTEND-AND-REST-PARAMETERS : resultCommandB:[string]: ${resultCommandB}`);
+        console.log(`::::::::::: DEBUG GENERIC-TYPES-WITH-EXTEND-AND-REST-PARAMETERS : resultCommandC:[string]: ${resultCommandC}`);
     }
 }
 GenericTypesImproved1.main();
 
-/*namespace GenericTypesImproved2 {  
-    class Person {
+namespace GenericTypesImproved2 {  
+    class FinancialEntity {
         name: string;
-        constructor(name: string) {
+        personalLoansTerms: number[];         
+        constructor(name: string, personalLoansTerms: number[]) {
           this.name = name;
+          this.personalLoansTerms = personalLoansTerms;
         }
     }
-    class Owner extends Person {
+    class Bank extends FinancialEntity {
         name: string;
-        age: number;
-        constructor(name: string, age: number) {
-          super(name);
-          this.age = age;
+        personalLoansTerms: number[]; 
+        autoLoansTerms: number[]; 
+        constructor(name: string, personalLoansTerms: number[], autoLoansTerms: number[]) {
+          super(name, personalLoansTerms);
+          this.autoLoansTerms = autoLoansTerms;
         }
     }
-    class Collection<T extends Person | Owner> {
-        private items: T[] = [];
-        constructor(items: T[]) {
-          this.items.push(...items);
+    class FinancialEntities<T extends FinancialEntity | Bank> {
+        private entities: T[] = [];
+        constructor(entities: T[]) {
+          this.entities.push(...entities);
         }
-        add(items: T) {
-          this.items.push(items);
+        add(entities: T) {
+          this.entities.push(entities);
         }
-        remove(index: number) {
-          this.items.splice(index, 1);
-        }
-        getItem(index: number): T {
-          return this.items[index];
+        getAll() {
+          return this.entities;
         }
     }
+    /*const items: FinancialEntities<Bank> = new FinancialEntities<Bank>([
+      new Bank("BBVA", [12, 24, 36, 48, 60], [12, 24, 36]),
+      new FinancialEntity("Central Bank", [12, 24, 36, 48, 60])
+    ]);*/
+    const financialEntities: FinancialEntities<Bank> = new FinancialEntities<Bank>([
+      new Bank("BBVA", [12, 24, 36, 48, 60], [12, 24, 36]),
+      new Bank("Banco Autofin", [12, 24, 36, 48, 60], [12, 24, 36])
+    ]);
     export function main(){      
-        console.log(`::::::::::: DEBUG EXTENDING-GENERIC-TYPES: statusScoreVal<LoanApplicationStatusTypeAlias, LoanApplicationScore>: ${statusScoreVal}`);    
+        console.log(`::::::::::: DEBUG EXTENDING-GENERIC-TYPES: (items: FinancialEntities<Bank>): ${financialEntities.getAll().map(x=>x.name)}`);    
     }
 }
 GenericTypesImproved2.main();
-*/
