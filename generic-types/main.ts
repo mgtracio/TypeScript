@@ -2,7 +2,10 @@ namespace GenericTypes {
     export enum LoanApplicationStatus { Open = 'Open', Close = 'Çlose', Pending = 'Pending' };
     export type LoanApplicationStatusTypeAlias = keyof typeof LoanApplicationStatus;
     export type LoanApplicationScore = number;
-    export type PairValue<A, B> = [A, B];    
+    export type PairValue<A, B> = [A, B];
+    function fun<T>(args:T):T {
+        return args;
+      }  
     export function main(){      
         let status: LoanApplicationStatusTypeAlias = LoanApplicationStatus.Open;        
         let score: LoanApplicationScore = 3;
