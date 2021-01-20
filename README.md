@@ -31,7 +31,7 @@ The generics have an extra feature "extend" in order to extend from a base inter
 Be able to call a function with any number of arguments, no matter how it is defined. This is useful to pass a variable number of parameters.
 
 ## Extensions
-Be able to extend the Language by creating you own extensions with Prototype
+Be able to extend the Language by creating you own extensions with Prototype.
 
 # Shortcuts to run
 tsc type-annotations/main && node type-annotations/main
