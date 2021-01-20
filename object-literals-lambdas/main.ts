@@ -4,15 +4,16 @@ namespace ObjectLiteralsWithLambdas {
   type ScoreCollection = number[];
 	type AllowedScoreTypes = Score | ScoreCollection;
   
-  interface ScoreTypedFn{ (n: AllowedScoreTypes): AllowedScoreTypes }  // Interface version
-  //type ScoreTypedFn = { (n: AllowedScoreTypes): AllowedScoreTypes }  // Type version
-
+  //interface ScoreTypedFn{ (n: AllowedScoreTypes): AllowedScoreTypes };  // Interface version
+  type ScoreTypedFn = { (n: AllowedScoreTypes): AllowedScoreTypes };  // Type version
+  //type ScoreTypedFn = (n: AllowedScoreTypes) => AllowedScoreTypes; // Type Lambda version
+  
   export function squareScore(n: AllowedScoreTypes): AllowedScoreTypes {
 
     const SQUARE_NUMBER_FOR_CLOSURE = 2;
     const squareLambdaClosure = (x: number): number => x**SQUARE_NUMBER_FOR_CLOSURE; // Lambda function with clousure
     const squareAndReduceLambda = (a: number, b: number) => squareLambdaClosure(a) + squareLambdaClosure(b);  // Lambda function
-    const processWithTypedAndLambdas: ScoreTypedFn = (n: AllowedScoreTypes) => { // Anonymous function / Arrow function 
+    const processWithTypedAndLambdas: ScoreTypedFn = (n: AllowedScoreTypes): AllowedScoreTypes => { // Anonymous function / Arrow function 
       var cases = {
         'number': function () {
           return (n as Score)**2;
