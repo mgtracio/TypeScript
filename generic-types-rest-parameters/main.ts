@@ -47,46 +47,55 @@ namespace GenericTypesImproved1 {
 GenericTypesImproved1.main();
 
 namespace GenericTypesImproved2 {  
-    class FinancialEntity {
-        name: string;
-        personalLoansTerms: number[];         
-        constructor(name: string, personalLoansTerms: number[]) {
-          this.name = name;
-          this.personalLoansTerms = personalLoansTerms;
-        }
-    }
-    class Bank extends FinancialEntity {
-        name: string;
-        personalLoansTerms: number[]; 
-        autoLoansTerms: number[]; 
-        constructor(name: string, personalLoansTerms: number[], autoLoansTerms: number[]) {
-          super(name, personalLoansTerms);
-          this.autoLoansTerms = autoLoansTerms;
-        }
-    }
-    class FinancialEntities<T extends FinancialEntity | Bank> {
-        private entities: T[] = [];
-        constructor(entities: T[]) {
-          this.entities.push(...entities);
-        }
-        add(entities: T) {
-          this.entities.push(entities);
-        }
-        getAll() {
-          return this.entities;
-        }
-    }
-    /*const items: FinancialEntities<Bank> = new FinancialEntities<Bank>([
-      new Bank("BBVA", [12, 24, 36, 48, 60], [12, 24, 36]),
-      new FinancialEntity("Central Bank", [12, 24, 36, 48, 60])
-    ]);*/
-    const financialEntities: FinancialEntities<Bank> = new FinancialEntities<Bank>([
-      new Bank("BBVA", [12, 24, 36, 48, 60], [12, 24, 36]),
-      new Bank("Banco Autofin", [12, 24, 36, 48, 60], [12, 24, 36])
-    ]);
-    financialEntities.add(new Bank("CREDITO REAL", [12, 24, 36, 48, 60], [12, 24, 36]));
-    export function main(){      
-        console.log(`::::::::::: DEBUG EXTENDING-GENERIC-TYPES: (items: FinancialEntities<Bank>): ${financialEntities.getAll().map(x=>x.name)}`);    
-    }
+  class FinancialEntity {
+      name: string;
+      personalLoansTerms: number[];         
+      countries: string[];
+      constructor(name: string, personalLoansTerms: number[], countries: string[]) {
+        this.name = name;
+        this.personalLoansTerms = personalLoansTerms;
+        this.countries = countries
+      }
+  }
+  class Bank extends FinancialEntity {
+      countries: string[];
+      autoLoansTerms: number[]; 
+      constructor(name: string, personalLoansTerms: number[], countries: string[], autoLoansTerms: number[]) {
+        super(name, personalLoansTerms, countries);
+        this.autoLoansTerms = autoLoansTerms;
+        this.countries = countries;
+      }
+  }
+  class FinancialEntities<T extends FinancialEntity | Bank> {
+      private entities: T[] = [];
+      constructor(entities: T[]) {
+        this.entities.push(...entities);
+      }
+      add(entities: T) {
+        this.entities.push(entities);
+      }
+      getAll() {
+        return this.entities;
+      }
+  }
+  const reduceLambdaForMaxValue = (a: number, b: number): number => b > a ? b : a;
+  const filterLambdaForSpecificStringValue = (a: string, filteredValue: string) => a === filteredValue;
+  /*const financialEntities: FinancialEntities<Bank> = new FinancialEntities<Bank>([
+    new Bank("BBVA", [24, 36, 48, 60],["MEXICO", "ECUADOR"], [12, 24, 36]),
+    new FinancialEntity("Banco Autofin", [12, 24, 36, 48, 60], ["MEXICO"])
+  ]);*/
+  const financialEntities: FinancialEntities<Bank> = new FinancialEntities<Bank>([
+    new Bank("BBVA", [24, 36, 48, 60],["MEXICO", "ECUADOR"], [12, 24, 36]),
+    new Bank("Banco Autofin", [12, 24, 36, 48, 60], ["MEXICO"], [12, 24, 36])
+  ]);
+  financialEntities.add(new Bank("PICHINCHA", [36, 48, 60], ["ECUADOR"], [12, 24, 36]));
+  financialEntities.add(new Bank("PRODUBANCO", [24, 36, 48, 60], ["ECUADOR"], [12, 24, 36]));
+  export function main(){      
+      console.log(`::::::::::: DEBUG EXTENDING-GENERIC-TYPES: (items: FinancialEntities<Bank>): ${financialEntities.getAll().map(x=>`  ENTITY: ${x.name} - ${x.countries}`)}`);    
+      console.log(`::::::::::: DEBUG EXTENDING-GENERIC-TYPES: (items: FinancialEntities<Bank>): ${financialEntities.getAll().map(x=>`  ENTITY: ${x.personalLoansTerms.reduce((a,b)=>Math.max(a,b))}`)}`);    
+      console.log(`::::::::::: DEBUG EXTENDING-GENERIC-TYPES: (items: FinancialEntities<Bank>): ${financialEntities.getAll().map(x=>`  ENTITY: ${x.personalLoansTerms.reduce((a,b)=> b>a?b:a)}`)}`);    
+      console.log(`::::::::::: DEBUG EXTENDING-GENERIC-TYPES: (items: FinancialEntities<Bank>): ${financialEntities.getAll().map(x=>`  ENTITY: ${x.personalLoansTerms.reduce(reduceLambdaForMaxValue)}`)}`);    
+      console.log(`::::::::::: DEBUG EXTENDING-GENERIC-TYPES: (items: FinancialEntities<Bank>): Ecuadorian Banks: ${financialEntities.getAll().filter(x=>x.countries.some(x=>x==="ECUADOR")).map(x=>x.name)}`);    
+  }
 }
 GenericTypesImproved2.main();
