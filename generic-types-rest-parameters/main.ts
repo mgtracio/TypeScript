@@ -84,6 +84,7 @@ namespace GenericTypesImproved2 {
       new Bank("BBVA", [12, 24, 36, 48, 60], [12, 24, 36]),
       new Bank("Banco Autofin", [12, 24, 36, 48, 60], [12, 24, 36])
     ]);
+    financialEntities.add(new Bank("CREDITO REAL", [12, 24, 36, 48, 60], [12, 24, 36]));
     export function main(){      
         console.log(`::::::::::: DEBUG EXTENDING-GENERIC-TYPES: (items: FinancialEntities<Bank>): ${financialEntities.getAll().map(x=>x.name)}`);    
     }
