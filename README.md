@@ -23,7 +23,8 @@
     # Shortcuts to run
     tsc type-aliases/main && node type-aliases/main
     tsc union-types/main && node union-types/main
-    tsc object-literals-lambdas/main && node object-literals-lambdas/main
+    tsc object-literals-lambdas/main && node object-literals-lambdas/mainç
+    tsc generic-types/main && node generic-types/main
     
     tsc extensions/main && node extensions/main
     
