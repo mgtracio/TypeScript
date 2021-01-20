@@ -17,6 +17,9 @@
     Be able to have a function that was declared without any named identifier, these are often arguments being passed to higher-order functions, or used to compose the result of a higher-order. 
     They are named too (arrow function, function literal, lambda abstraction, lambda function, lambda expression, or closures).
 
+    ## Generic Types
+    Be able to abstract types / to build reusable components in order to create flexible and scalable components that work with any data type and not restrict to one type.
+
     ## Extensions
     extensions https://ultimatecourses.com/blog/understanding-javascript-types-and-reliable-type-checking
 

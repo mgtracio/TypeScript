@@ -1,4 +1,4 @@
-namespace GenericsTypes {  
+namespace GenericTypes {  
     export enum LoanApplicationStatus { Open = 'Open', Close = 'Çlose', Pending = 'Pending' };
     export type LoanApplicationStatusTypeAlias = keyof typeof LoanApplicationStatus;
     export type LoanApplicationScore = number;
@@ -8,8 +8,8 @@ namespace GenericsTypes {
         let score: LoanApplicationScore = 3;
         let statusScoreVal: PairValue<LoanApplicationStatusTypeAlias, LoanApplicationScore> = [status, score];
         let anyTuple: PairValue<string, Boolean> = [status, false];        
-        console.log(`::::::::::: DEBUG GENERICS-TYPES: statusScoreVal<LoanApplicationStatusTypeAlias, LoanApplicationScore>: ${statusScoreVal}`);
-        console.log(`::::::::::: DEBUG GENERICS-TYPES: anyTuple<string, Boolean>: ${anyTuple}`);
+        console.log(`::::::::::: DEBUG GENERIC-TYPES: statusScoreVal<LoanApplicationStatusTypeAlias, LoanApplicationScore>: ${statusScoreVal}`);
+        console.log(`::::::::::: DEBUG GENERIC-TYPES: anyTuple<string, Boolean>: ${anyTuple}`);
     }
 }
-GenericsTypes.main();
+GenericTypes.main();
