@@ -11,7 +11,7 @@ Be able to declare or annotate type values for example (variables, constants, ar
 Be able to rename pre-existing data types for example (primitive types, custom classes, unions, and generics) in order to achieve a more legible/readable and maintainable code.
 
 ## Union Types
-Be able to have more than one data type for a value this includes variables, constants, function parameters and even return values.
+Be able to have more than one data type for a value, this includes (variables, constants, function parameters and even return values).
 
 ## Intersection Types
 Intersection types are closely related to union types, but they are used very differently. An intersection type combines multiple types into one. This allows you to add together existing types to get a single type that has all the features you need. For example, Person & Serializable & Loggable is a type which is all of Person and Serializable and Loggable. That means an object of this type will have all members of all three types.
